@@ -1,0 +1,23 @@
+.lesson-content {
+  max-width: 800px; /* Adjust this value as needed */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.lesson-video-container {
+  margin-bottom: 20px;
+}
+
+.lesson-text {
+  margin-bottom: 20px;
+}
+
+.lesson-code {
+  margin-bottom: 20px;
+}
+
+.lesson-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

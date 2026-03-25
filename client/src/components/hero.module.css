@@ -1,0 +1,26 @@
+.beams {
+  background-image: url("./img/beams/hero-dark@90.jpg");
+  background-size: 86.125rem;
+}
+
+.spotlights {
+  background-image: url("./img/beams/spotlights.png");
+  background-size: 60.125rem;
+}
+
+.youlikebeams {
+  background-image: url("./img/beams/1-dark@1.5x.png");
+  /* background-size: 60.125rem; */
+}
+.wegotbeams {
+  background-image: url("./img/beams/7-dark@1.5x.png");
+  background-size: 60.125rem;
+}
+.morebeams {
+  background-image: url("./img/beams/1-dark@1.5x.png");
+  /* background-size: 60.125rem; */
+}
+.annnndmorebeams {
+  background-image: url("./img/beams/1-dark@1.5x.png");
+  /* background-size: 60.125rem; */
+}

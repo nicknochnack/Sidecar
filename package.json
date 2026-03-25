@@ -1,0 +1,43 @@
+{
+  "name": "performance-insights",
+  "version": "1.0.0",
+  "main": "server.js",
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm run start --prefix ./client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "Performance insights for endurance athletes via Intervals.icu and Strava",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "axios": "^1.7.5",
+    "bcrypt": "^5.1.1",
+    "concurrently": "^8.2.2",
+    "config": "^3.3.12",
+    "cors": "^2.8.5",
+    "dotenv": "16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
+    "nodemon": "^3.1.4",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "pg": "^8.12.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13"
+  }
+}
