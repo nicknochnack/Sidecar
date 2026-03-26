@@ -145,6 +145,13 @@ export default {
           ".tap-highlight-color": {
             "-webkit-tap-highlight-color": "rgba(0, 0, 0, 0)",
           },
+          ".scrollbar-hide": {
+            "-ms-overflow-style": "none",
+            "scrollbar-width": "none",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          },
         });
         matchUtilities(
           {

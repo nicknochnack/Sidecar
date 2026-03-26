@@ -1590,7 +1590,7 @@ function Dashboard() {
           Performance Insights
         </h1>
         <Tabs defaultValue="smart">
-          <TabsList className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+          <TabsList className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm w-full justify-start md:justify-center">
             <TabsTrigger value="smart">Smart Dashboard</TabsTrigger>
             <TabsTrigger value="activity">Activity Feed</TabsTrigger>
             <TabsTrigger value="training-load">Training Load</TabsTrigger>
