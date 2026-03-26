@@ -992,6 +992,7 @@ function SmartDashboardTab() {
   ]);
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
+  const [showAssistant, setShowAssistant] = useState(false);
   const chatEndRef = useRef(null);
 
   useEffect(() => {
@@ -1388,7 +1389,7 @@ function SmartDashboardTab() {
 
   return (
     <div
-      className="mt-4 flex gap-4"
+      className="mt-4 flex gap-4 relative"
       style={{ height: "calc(100vh - 200px)", minHeight: 600 }}
     >
       {/* ── Left: Visualizations ── */}
@@ -1397,12 +1398,22 @@ function SmartDashboardTab() {
           <span className="text-xs text-gray-500 dark:text-slate-500">
             Chat to add, remove, or create charts
           </span>
-          <button
-            onClick={() => setPanels(DEFAULT_PANELS)}
-            className="text-xs text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200 px-2 py-1 bg-white dark:bg-slate-800 rounded border border-gray-200 dark:border-slate-700 transition-colors"
-          >
-            Reset Dashboard
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Mobile Assistant Toggle */}
+            <button
+              onClick={() => setShowAssistant(!showAssistant)}
+              className="lg:hidden text-xs text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200 px-3 py-1 bg-white dark:bg-slate-800 rounded border border-gray-200 dark:border-slate-700 transition-colors flex items-center gap-1"
+            >
+              <span>💬</span>
+              <span>{showAssistant ? "Hide" : "Show"} Assistant</span>
+            </button>
+            <button
+              onClick={() => setPanels(DEFAULT_PANELS)}
+              className="text-xs text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200 px-2 py-1 bg-white dark:bg-slate-800 rounded border border-gray-200 dark:border-slate-700 transition-colors"
+            >
+              Reset Dashboard
+            </button>
+          </div>
         </div>
 
         {(() => {
@@ -1439,14 +1450,47 @@ function SmartDashboardTab() {
       </div>
 
       {/* ── Right: Chat UI ── */}
-      <div className="w-72 flex flex-col bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700 shrink-0">
-        <div className="px-4 py-3 border-b border-gray-200 dark:border-slate-700">
-          <div className="text-sm font-medium text-slate-200">
-            Dashboard Assistant
+      <div
+        className={`
+        ${showAssistant ? "flex" : "hidden"} lg:flex
+        w-full lg:w-72
+        flex-col bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700
+        lg:shrink-0
+        fixed lg:relative
+        inset-0 lg:inset-auto
+        z-50 lg:z-auto
+        m-4 lg:m-0
+      `}
+      >
+        <div className="px-4 py-3 border-b border-gray-200 dark:border-slate-700 flex items-center justify-between">
+          <div>
+            <div className="text-sm font-medium text-gray-900 dark:text-slate-200">
+              Dashboard Assistant
+            </div>
+            <div className="text-xs text-gray-500 dark:text-slate-500">
+              Ask questions or change visualizations
+            </div>
           </div>
-          <div className="text-xs text-gray-500 dark:text-slate-500">
-            Ask questions or change visualizations
-          </div>
+          {/* Close button for mobile */}
+          <button
+            onClick={() => setShowAssistant(false)}
+            className="lg:hidden p-1 hover:bg-gray-100 dark:hover:bg-slate-700 rounded transition-colors"
+            aria-label="Close assistant"
+          >
+            <svg
+              className="w-5 h-5 text-gray-500 dark:text-slate-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         </div>
 
         <div className="flex-1 overflow-y-auto p-3 space-y-3 min-h-0">
@@ -1523,6 +1567,14 @@ function SmartDashboardTab() {
           </div>
         </div>
       </div>
+
+      {/* Backdrop for mobile when assistant is open */}
+      {showAssistant && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setShowAssistant(false)}
+        />
+      )}
     </div>
   );
 }
