@@ -583,7 +583,48 @@ function AdminPelotonComparison() {
     try {
       const params = selectedDay ? { day: selectedDay } : {};
       const res = await api.get("/tdc/admin/peloton-comparison", { params });
-      setComparison(res.data);
+
+      console.log("Raw peloton data:", res.data);
+
+      // Aggregate data by peloton
+      const aggregated = res.data.reduce((acc, row) => {
+        const key = row.id;
+        if (!acc[key]) {
+          acc[key] = {
+            id: row.id,
+            name: row.name,
+            color: row.color,
+            ride_count: 0,
+            total_distance: 0,
+            total_watts_sum: 0,
+            watts_count: 0,
+          };
+        }
+
+        const rideCount = parseInt(row.ride_count) || 0;
+        acc[key].ride_count += rideCount;
+        acc[key].total_distance += parseFloat(row.total_distance) || 0;
+
+        if (row.avg_watts) {
+          acc[key].total_watts_sum += parseFloat(row.avg_watts) * rideCount;
+          acc[key].watts_count += rideCount;
+        }
+
+        return acc;
+      }, {});
+
+      console.log("Aggregated peloton data:", aggregated);
+
+      // Convert to array and calculate averages
+      const result = Object.values(aggregated).map((p) => ({
+        ...p,
+        avg_distance: p.ride_count > 0 ? p.total_distance / p.ride_count : 0,
+        avg_watts: p.watts_count > 0 ? p.total_watts_sum / p.watts_count : null,
+      }));
+
+      console.log("Final peloton result:", result);
+
+      setComparison(result);
     } catch (error) {
       console.error("Failed to load comparison:", error);
     } finally {
@@ -618,7 +659,6 @@ function AdminPelotonComparison() {
               <thead>
                 <tr className="border-b">
                   <th className="text-left p-2">Peloton</th>
-                  <th className="text-left p-2">Day</th>
                   <th className="text-right p-2">Rides</th>
                   <th className="text-right p-2">Total Distance</th>
                   <th className="text-right p-2">Avg Distance</th>
@@ -637,7 +677,6 @@ function AdminPelotonComparison() {
                         {row.name}
                       </div>
                     </td>
-                    <td className="p-2">{row.day}</td>
                     <td className="text-right p-2">{row.ride_count}</td>
                     <td className="text-right p-2">
                       {formatDistance(row.total_distance)}
@@ -675,7 +714,54 @@ function AdminRiderComparison() {
     try {
       const params = selectedDay ? { day: selectedDay } : {};
       const res = await api.get("/tdc/admin/rider-comparison", { params });
-      setComparison(res.data);
+
+      console.log("Raw rider data:", res.data);
+
+      // Aggregate data by rider (user_id)
+      const aggregated = res.data.reduce((acc, row) => {
+        const key = row.user_id;
+        if (!acc[key]) {
+          acc[key] = {
+            user_id: row.user_id,
+            email: row.email,
+            peloton_name: row.peloton_name,
+            ride_count: 0,
+            total_distance: 0,
+            total_elevation: 0,
+            total_watts_sum: 0,
+            watts_count: 0,
+          };
+        }
+
+        const rideCount = parseInt(row.ride_count) || 0;
+        acc[key].ride_count += rideCount;
+        acc[key].total_distance += parseFloat(row.total_distance) || 0;
+        acc[key].total_elevation += parseFloat(row.total_elevation) || 0;
+
+        // avg_watts from backend is already averaged per day/peloton group
+        // We need to weight it by ride count to get proper overall average
+        if (row.avg_watts) {
+          acc[key].total_watts_sum += parseFloat(row.avg_watts) * rideCount;
+          acc[key].watts_count += rideCount;
+        }
+
+        return acc;
+      }, {});
+
+      console.log("Aggregated rider data:", aggregated);
+
+      // Convert to array and calculate averages, sort by total distance
+      const result = Object.values(aggregated)
+        .map((r) => ({
+          ...r,
+          avg_watts:
+            r.watts_count > 0 ? r.total_watts_sum / r.watts_count : null,
+        }))
+        .sort((a, b) => b.total_distance - a.total_distance);
+
+      console.log("Final rider result:", result);
+
+      setComparison(result);
     } catch (error) {
       console.error("Failed to load comparison:", error);
     } finally {
@@ -711,7 +797,6 @@ function AdminRiderComparison() {
                 <tr className="border-b">
                   <th className="text-left p-2">Rider</th>
                   <th className="text-left p-2">Peloton</th>
-                  <th className="text-left p-2">Day</th>
                   <th className="text-right p-2">Rides</th>
                   <th className="text-right p-2">Total Distance</th>
                   <th className="text-right p-2">Avg Power</th>
@@ -723,7 +808,6 @@ function AdminRiderComparison() {
                   <tr key={i} className="border-b">
                     <td className="p-2">{row.email}</td>
                     <td className="p-2">{row.peloton_name || "—"}</td>
-                    <td className="p-2">{row.day}</td>
                     <td className="text-right p-2">{row.ride_count}</td>
                     <td className="text-right p-2">
                       {formatDistance(row.total_distance)}
