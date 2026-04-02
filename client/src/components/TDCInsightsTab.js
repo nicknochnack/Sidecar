@@ -465,7 +465,27 @@ function AdminOverview() {
   const loadOverview = async () => {
     try {
       const res = await api.get("/tdc/admin/overview");
-      setOverview(res.data);
+      console.log("Overview data:", res.data);
+      console.log("Peloton stats:", res.data.peloton_stats);
+
+      // Ensure numeric values for charts
+      const processedData = {
+        ...res.data,
+        total_distance: parseFloat(res.data.total_distance) || 0,
+        peloton_stats: (res.data.peloton_stats || []).map((p) => ({
+          ...p,
+          total_distance: parseFloat(p.total_distance) || 0,
+          activity_count: parseInt(p.activity_count) || 0,
+        })),
+        day_stats: (res.data.day_stats || []).map((d) => ({
+          ...d,
+          activity_count: parseInt(d.activity_count) || 0,
+          total_distance: parseFloat(d.total_distance) || 0,
+        })),
+      };
+
+      console.log("Processed overview data:", processedData);
+      setOverview(processedData);
     } catch (error) {
       console.error("Failed to load overview:", error);
     } finally {
@@ -547,7 +567,7 @@ function AdminOverview() {
                   cx="50%"
                   cy="50%"
                   outerRadius={80}
-                  label
+                  label={(entry) => `${(entry.value / 1000).toFixed(1)} km`}
                 >
                   {overview.peloton_stats.map((entry, index) => (
                     <Cell
@@ -556,7 +576,9 @@ function AdminOverview() {
                     />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip
+                  formatter={(value) => `${(value / 1000).toFixed(1)} km`}
+                />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
