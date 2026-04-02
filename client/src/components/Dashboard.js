@@ -1583,9 +1583,9 @@ function SmartDashboardTab() {
 
 function Dashboard() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       <Header />
-      <div className="container mx-auto px-4 py-6 max-w-6xl">
+      <div className="container mx-auto px-4 py-6 max-w-6xl flex-grow">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
           Performance Insights
         </h1>
