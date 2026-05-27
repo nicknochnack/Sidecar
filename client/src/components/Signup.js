@@ -49,28 +49,13 @@ function Signup({ setIsAuth }) {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
-      <div className="fixed top-0 left-0 right-0 z-10">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+      <div className="fixed top-0 left-0 right-0 z-10 bg-white dark:bg-neutral-950">
         <Header />
       </div>
 
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-sidecar-indigo-600 via-sidecar-indigo-700 to-sidecar-indigo-800 pt-24 pb-16 overflow-hidden">
-        <GeometricShapes variant="hero" />
-
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Get Started with Sidecar
-          </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-            Create your account and start provisioning A2A servers for watsonx
-            Orchestrate
-          </p>
-        </div>
-      </div>
-
       {/* Signup Form Section */}
-      <div className="flex justify-center items-start px-4 py-12 bg-neutral-50 dark:bg-neutral-900">
+      <div className="flex justify-center items-center min-h-screen px-4 py-24">
         <form onSubmit={handleSignup} className="w-full max-w-md">
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-center text-red-600 text-sm">

@@ -50,7 +50,7 @@ function Login({ isAuth, setIsAuth }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
       {isLoading ? (
         <div className="fixed inset-0 bg-sidecar-indigo-600/90 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="text-white text-2xl font-extrabold">Logging in!</div>
@@ -59,26 +59,12 @@ function Login({ isAuth, setIsAuth }) {
         <></>
       )}
 
-      <div className="fixed top-0 left-0 right-0 z-10">
+      <div className="fixed top-0 left-0 right-0 z-10 bg-white dark:bg-neutral-950">
         <Header />
       </div>
 
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-sidecar-indigo-600 via-sidecar-indigo-700 to-sidecar-indigo-800 pt-24 pb-16 overflow-hidden">
-        <GeometricShapes variant="hero" />
-
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Welcome Back
-          </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-            Log in to access your Sidecar dashboard and manage your A2A servers
-          </p>
-        </div>
-      </div>
-
       {/* Login Form Section */}
-      <div className="flex justify-center items-start px-4 py-12 bg-neutral-50 dark:bg-neutral-900">
+      <div className="flex justify-center items-center min-h-screen px-4 py-24">
         <form onSubmit={handleLogin} className="w-full max-w-md">
           {loginError && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-center text-red-600 text-sm">
