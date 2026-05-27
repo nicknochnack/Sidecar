@@ -19,7 +19,7 @@
     "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
   "license": "ISC",
-  "description": "Control plane for building, running, importing and monitoring A2A servers for watsonx Orchestrate",
+  "description": "Sidecar - Provision A2A servers on the fly for watsonx Orchestrate integration",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
     "axios": "^1.7.5",

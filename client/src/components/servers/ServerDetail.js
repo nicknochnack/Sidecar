@@ -54,7 +54,7 @@ const ServerDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex flex-col">
         <Header />
         <div className="container mx-auto px-4 py-6 flex-grow">
           <Skeleton className="h-8 w-64 mb-4" />
@@ -67,7 +67,7 @@ const ServerDetail = () => {
 
   if (error || !server) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex flex-col">
         <Header />
         <div className="container mx-auto px-4 py-6 flex-grow">
           <Card className="bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800">
@@ -95,7 +95,7 @@ const ServerDetail = () => {
 
   if (showIntegrationWizard) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex flex-col">
         <Header />
         <div className="container mx-auto px-4 py-6 flex-grow">
           <IntegrationSetupWizard
@@ -113,16 +113,16 @@ const ServerDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex flex-col">
       <Header />
 
       {/* Toast */}
       {toast && (
         <div
-          className={`fixed top-20 right-4 z-50 px-4 py-3 rounded-lg shadow-lg text-sm font-medium transition-all ${
+          className={`fixed top-20 right-4 z-50 px-4 py-3 rounded-lg border shadow-lg text-sm font-medium transition-all ${
             toast.type === "error"
-              ? "bg-red-600 text-white"
-              : "bg-emerald-600 text-white"
+              ? "bg-red-600 border-red-700 text-white"
+              : "bg-emerald-600 border-emerald-700 text-white"
           }`}
         >
           {toast.msg}
@@ -137,14 +137,14 @@ const ServerDetail = () => {
               variant="outline"
               size="sm"
               onClick={() => navigate("/servers")}
-              className="mb-2"
+              className="mb-2 border-neutral-300 dark:border-neutral-700"
             >
               ← Back to Servers
             </Button>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+            <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 font-mono">
               {server.name}
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+            <p className="text-neutral-600 dark:text-neutral-400 text-sm mt-1">
               {server.description || "No description"}
             </p>
           </div>
@@ -153,7 +153,7 @@ const ServerDetail = () => {
               <Button
                 onClick={handleStart}
                 disabled={actionLoading}
-                className="bg-green-600 hover:bg-green-700 text-white"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold"
               >
                 {actionLoading ? "Starting..." : "Start Server"}
               </Button>
@@ -162,7 +162,7 @@ const ServerDetail = () => {
               <>
                 <Button
                   onClick={() => setShowIntegrationWizard(true)}
-                  className="bg-purple-600 hover:bg-purple-700 text-white"
+                  className="bg-sidecar-indigo-600 hover:bg-sidecar-indigo-700 text-white font-semibold"
                 >
                   Import to Orchestrate
                 </Button>
@@ -170,7 +170,7 @@ const ServerDetail = () => {
                   onClick={handleStop}
                   disabled={actionLoading}
                   variant="outline"
-                  className="border-red-300 text-red-600 hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900"
+                  className="border-red-300 text-red-600 hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900/20 font-semibold"
                 >
                   {actionLoading ? "Stopping..." : "Stop Server"}
                 </Button>
@@ -180,60 +180,63 @@ const ServerDetail = () => {
         </div>
 
         {/* Server Info Card */}
-        <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 mb-6">
+        <Card className="bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 mb-6">
           <CardHeader>
-            <CardTitle className="text-gray-900 dark:text-gray-100">
+            <CardTitle className="text-neutral-900 dark:text-neutral-100">
               Server Information
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="text-sm text-neutral-500 dark:text-neutral-400 uppercase tracking-wide font-mono">
                   Status
                 </div>
-                <div className="font-medium text-gray-900 dark:text-gray-100 mt-1">
+                <div className="font-medium text-neutral-900 dark:text-neutral-100 mt-1">
                   <span
-                    className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
+                    className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-mono ${
                       isRunning
-                        ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                        : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
+                        ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                        : "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-300"
                     }`}
                   >
-                    {isRunning ? "●" : "○"} {server.status}
+                    <span className={isRunning ? "animate-pulse" : ""}>
+                      {isRunning ? "●" : "○"}
+                    </span>{" "}
+                    {server.status}
                   </span>
                 </div>
               </div>
               <div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="text-sm text-neutral-500 dark:text-neutral-400 uppercase tracking-wide font-mono">
                   Port
                 </div>
-                <div className="font-mono text-gray-900 dark:text-gray-100 mt-1">
+                <div className="font-mono text-neutral-900 dark:text-neutral-100 mt-1 font-semibold">
                   {server.port || "—"}
                 </div>
               </div>
               <div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="text-sm text-neutral-500 dark:text-neutral-400 uppercase tracking-wide font-mono">
                   PID
                 </div>
-                <div className="font-mono text-gray-900 dark:text-gray-100 mt-1">
+                <div className="font-mono text-neutral-900 dark:text-neutral-100 mt-1 font-semibold">
                   {server.pid || "—"}
                 </div>
               </div>
               <div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="text-sm text-neutral-500 dark:text-neutral-400 uppercase tracking-wide font-mono">
                   Created
                 </div>
-                <div className="text-gray-900 dark:text-gray-100 mt-1">
+                <div className="text-neutral-900 dark:text-neutral-100 mt-1">
                   {new Date(server.created_at).toLocaleDateString()}
                 </div>
               </div>
             </div>
-            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-              <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                Copilot Base URL
+            <div className="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+              <div className="text-sm text-neutral-500 dark:text-neutral-400 mb-2 uppercase tracking-wide font-mono">
+                Endpoint URL
               </div>
-              <div className="font-mono text-sm text-gray-900 dark:text-gray-100 break-all">
+              <div className="font-mono text-sm text-neutral-900 dark:text-neutral-100 break-all bg-neutral-50 dark:bg-neutral-800 px-3 py-2 rounded border border-neutral-200 dark:border-neutral-700">
                 {server.copilot_base_url}
               </div>
             </div>
@@ -253,39 +256,39 @@ const ServerDetail = () => {
           </TabsContent>
 
           <TabsContent value="config">
-            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <Card className="bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
               <CardHeader>
-                <CardTitle className="text-gray-900 dark:text-gray-100">
+                <CardTitle className="text-neutral-900 dark:text-neutral-100">
                   Agent Configuration
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 uppercase tracking-wide font-mono">
                     Agent Name
                   </div>
-                  <div className="text-gray-900 dark:text-gray-100 mt-1">
+                  <div className="text-neutral-900 dark:text-neutral-100 mt-1 font-mono">
                     {server.agent_name || "—"}
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 uppercase tracking-wide font-mono">
                     Description
                   </div>
-                  <div className="text-gray-900 dark:text-gray-100 mt-1">
+                  <div className="text-neutral-900 dark:text-neutral-100 mt-1">
                     {server.agent_description || "—"}
                   </div>
                 </div>
                 {server.agent_tags && server.agent_tags.length > 0 && (
                   <div>
-                    <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2 uppercase tracking-wide font-mono">
                       Tags
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {server.agent_tags.map((tag, i) => (
                         <span
                           key={i}
-                          className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs"
+                          className="px-2 py-1 bg-sidecar-indigo-100 dark:bg-sidecar-indigo-950 text-sidecar-indigo-800 dark:text-sidecar-indigo-200 rounded text-xs font-mono"
                         >
                           {tag}
                         </span>
@@ -298,14 +301,14 @@ const ServerDetail = () => {
           </TabsContent>
 
           <TabsContent value="metrics">
-            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <Card className="bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
               <CardHeader>
-                <CardTitle className="text-gray-900 dark:text-gray-100">
+                <CardTitle className="text-neutral-900 dark:text-neutral-100">
                   Performance Metrics
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                <div className="text-center py-8 text-neutral-500 dark:text-neutral-400">
                   Metrics coming soon...
                 </div>
               </CardContent>

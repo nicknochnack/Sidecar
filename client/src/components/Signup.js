@@ -49,28 +49,28 @@ function Signup({ setIsAuth }) {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
       <div className="fixed top-0 left-0 right-0 z-10">
         <Header />
       </div>
 
       {/* Hero Section */}
-      <div className="relative bg-tdc-purple pt-24 pb-16 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-sidecar-indigo-600 via-sidecar-indigo-700 to-sidecar-indigo-800 pt-24 pb-16 overflow-hidden">
         <GeometricShapes variant="hero" />
 
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Join the Movement
+            Get Started with Sidecar
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-            Create your account and start making a difference in the fight
-            against cancer
+            Create your account and start provisioning A2A servers for watsonx
+            Orchestrate
           </p>
         </div>
       </div>
 
       {/* Signup Form Section */}
-      <div className="flex justify-center items-start px-4 py-12 bg-gray-50 dark:bg-gray-800">
+      <div className="flex justify-center items-start px-4 py-12 bg-neutral-50 dark:bg-neutral-900">
         <form onSubmit={handleSignup} className="w-full max-w-md">
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-center text-red-600 text-sm">
@@ -78,12 +78,12 @@ function Signup({ setIsAuth }) {
             </div>
           )}
 
-          <Card className="bg-white shadow-lg border-gray-200 dark:border-gray-700">
+          <Card className="bg-white dark:bg-neutral-900 shadow-lg border-neutral-200 dark:border-neutral-800">
             <CardHeader className="space-y-1 pb-4">
-              <CardTitle className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
                 Sign Up
               </CardTitle>
-              <CardDescription className="text-gray-600 dark:text-gray-400">
+              <CardDescription className="text-neutral-600 dark:text-neutral-400">
                 Create a new account below with your email
               </CardDescription>
             </CardHeader>
@@ -92,7 +92,7 @@ function Signup({ setIsAuth }) {
                 <div className="grid gap-2">
                   <Label
                     htmlFor="email"
-                    className="text-gray-700 dark:text-gray-300 font-medium"
+                    className="text-neutral-700 dark:text-neutral-300 font-medium"
                   >
                     Email
                   </Label>
@@ -103,13 +103,13 @@ function Signup({ setIsAuth }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="border-gray-300 dark:border-gray-600 focus:border-tdc-purple focus:ring-tdc-purple"
+                    className="border-neutral-300 dark:border-neutral-700 focus:border-sidecar-indigo-600 focus:ring-sidecar-indigo-600"
                   />
                 </div>
                 <div className="grid gap-2">
                   <Label
                     htmlFor="password"
-                    className="text-gray-700 dark:text-gray-300 font-medium"
+                    className="text-neutral-700 dark:text-neutral-300 font-medium"
                   >
                     Password
                   </Label>
@@ -121,7 +121,7 @@ function Signup({ setIsAuth }) {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="border-gray-300 dark:border-gray-600 focus:border-tdc-purple focus:ring-tdc-purple"
+                      className="border-neutral-300 dark:border-neutral-700 focus:border-sidecar-indigo-600 focus:ring-sidecar-indigo-600"
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}
@@ -133,16 +133,16 @@ function Signup({ setIsAuth }) {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-tdc-yellow hover:bg-tdc-yellow-dark text-gray-900 dark:text-gray-100 font-bold py-2.5 transition-colors"
+                  className="w-full bg-sidecar-indigo-600 hover:bg-sidecar-indigo-700 text-white font-bold py-2.5 transition-colors"
                 >
                   Sign Up
                 </Button>
               </div>
-              <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
+              <div className="mt-4 text-center text-sm text-neutral-600 dark:text-neutral-400">
                 Already have an account?{" "}
                 <Link
                   to="/login"
-                  className="text-tdc-purple hover:text-tdc-purple-dark underline font-medium"
+                  className="text-sidecar-indigo-600 hover:text-sidecar-indigo-700 dark:text-sidecar-indigo-400 dark:hover:text-sidecar-indigo-300 underline font-medium"
                 >
                   Log in
                 </Link>

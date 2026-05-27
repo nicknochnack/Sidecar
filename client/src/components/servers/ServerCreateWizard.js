@@ -75,13 +75,13 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+    <Card className="w-full max-w-3xl mx-auto bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
       <CardHeader>
-        <CardTitle className="text-gray-900 dark:text-gray-100">
+        <CardTitle className="text-neutral-900 dark:text-neutral-100">
           Create New A2A Server
         </CardTitle>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          Configure your Copilot-to-Orchestrate bridge server
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+          Provision a new Agent-to-Agent bridge server for watsonx Orchestrate
         </p>
       </CardHeader>
       <CardContent>
@@ -108,7 +108,7 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
                 placeholder="My Copilot Agent"
                 value={formData.name}
                 onChange={(e) => updateField("name", e.target.value)}
-                className="bg-white dark:bg-gray-800"
+                className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700"
               />
             </div>
             <div className="space-y-2">
@@ -118,7 +118,7 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
                 placeholder="Brief description of this server"
                 value={formData.description}
                 onChange={(e) => updateField("description", e.target.value)}
-                className="bg-white dark:bg-gray-800"
+                className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700"
               />
             </div>
             <div className="space-y-2">
@@ -130,10 +130,10 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
                 onChange={(e) =>
                   updateField("copilot_base_url", e.target.value)
                 }
-                className="bg-white dark:bg-gray-800"
+                className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700 font-mono"
               />
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                The base URL for your Microsoft Copilot instance
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                The base URL for your agent endpoint
               </p>
             </div>
           </TabsContent>
@@ -141,26 +141,24 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
           {/* Step 2: Credentials */}
           <TabsContent value="credentials" className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="copilot_secret">
-                Copilot Direct Line Secret *
-              </Label>
+              <Label htmlFor="copilot_secret">Agent Secret / API Key *</Label>
               <Input
                 id="copilot_secret"
                 type="password"
-                placeholder="Your Direct Line Secret"
+                placeholder="Your agent authentication secret"
                 value={formData.copilot_secret}
                 onChange={(e) => updateField("copilot_secret", e.target.value)}
-                className="bg-white dark:bg-gray-800"
+                className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700 font-mono"
               />
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">
                 This secret will be encrypted and stored securely
               </p>
             </div>
-            <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-              <p className="text-sm text-blue-900 dark:text-blue-200">
-                <strong>Where to find this:</strong> In your Copilot Studio,
-                navigate to Settings → Channels → Direct Line, and copy the
-                secret key.
+            <div className="p-4 bg-sidecar-indigo-50 dark:bg-sidecar-indigo-950 border border-sidecar-indigo-200 dark:border-sidecar-indigo-800 rounded-lg">
+              <p className="text-sm text-sidecar-indigo-900 dark:text-sidecar-indigo-200">
+                <strong>Security:</strong> Your credentials are encrypted at
+                rest and transmitted securely. They're only used to establish
+                the A2A connection.
               </p>
             </div>
           </TabsContent>
@@ -174,7 +172,7 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
                 placeholder="Email Assistant"
                 value={formData.agent_name}
                 onChange={(e) => updateField("agent_name", e.target.value)}
-                className="bg-white dark:bg-gray-800"
+                className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700 font-mono"
               />
             </div>
             <div className="space-y-2">
@@ -187,7 +185,7 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
                   updateField("agent_description", e.target.value)
                 }
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-700 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
               />
             </div>
             <div className="space-y-2">
@@ -197,7 +195,7 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
                 placeholder="email, productivity, automation"
                 value={formData.agent_tags}
                 onChange={(e) => updateField("agent_tags", e.target.value)}
-                className="bg-white dark:bg-gray-800"
+                className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700"
               />
             </div>
             <div className="space-y-2">
@@ -210,7 +208,7 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
                 value={formData.agent_examples}
                 onChange={(e) => updateField("agent_examples", e.target.value)}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-700 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 font-mono text-sm"
               />
             </div>
           </TabsContent>
@@ -218,39 +216,39 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
           {/* Step 4: Review */}
           <TabsContent value="review" className="space-y-4">
             <div className="space-y-3">
-              <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+              <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">
                 Review Configuration
               </h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                  <span className="text-gray-600 dark:text-gray-400">
+                <div className="flex justify-between py-2 border-b border-neutral-200 dark:border-neutral-800">
+                  <span className="text-neutral-600 dark:text-neutral-400 uppercase tracking-wide font-mono text-xs">
                     Server Name:
                   </span>
-                  <span className="font-medium text-gray-900 dark:text-gray-100">
+                  <span className="font-medium text-neutral-900 dark:text-neutral-100 font-mono">
                     {formData.name}
                   </span>
                 </div>
-                <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                  <span className="text-gray-600 dark:text-gray-400">
-                    Copilot URL:
+                <div className="flex justify-between py-2 border-b border-neutral-200 dark:border-neutral-800">
+                  <span className="text-neutral-600 dark:text-neutral-400 uppercase tracking-wide font-mono text-xs">
+                    Endpoint URL:
                   </span>
-                  <span className="font-mono text-xs text-gray-900 dark:text-gray-100">
+                  <span className="font-mono text-xs text-neutral-900 dark:text-neutral-100">
                     {formData.copilot_base_url}
                   </span>
                 </div>
-                <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                  <span className="text-gray-600 dark:text-gray-400">
+                <div className="flex justify-between py-2 border-b border-neutral-200 dark:border-neutral-800">
+                  <span className="text-neutral-600 dark:text-neutral-400 uppercase tracking-wide font-mono text-xs">
                     Agent Name:
                   </span>
-                  <span className="font-medium text-gray-900 dark:text-gray-100">
+                  <span className="font-medium text-neutral-900 dark:text-neutral-100 font-mono">
                     {formData.agent_name}
                   </span>
                 </div>
-                <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                  <span className="text-gray-600 dark:text-gray-400">
+                <div className="flex justify-between py-2 border-b border-neutral-200 dark:border-neutral-800">
+                  <span className="text-neutral-600 dark:text-neutral-400 uppercase tracking-wide font-mono text-xs">
                     Tags:
                   </span>
-                  <span className="text-gray-900 dark:text-gray-100">
+                  <span className="text-neutral-900 dark:text-neutral-100">
                     {formData.agent_tags || "None"}
                   </span>
                 </div>
@@ -265,7 +263,7 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
         </Tabs>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="flex justify-between mt-6 pt-4 border-t border-neutral-200 dark:border-neutral-800">
           <Button
             variant="outline"
             onClick={() => {
@@ -277,6 +275,7 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
                 setCurrentStep(steps[currentIndex - 1]);
               }
             }}
+            className="border-neutral-300 dark:border-neutral-700"
           >
             {currentStep === "basics" ? "Cancel" : "Back"}
           </Button>
@@ -291,6 +290,7 @@ const ServerCreateWizard = ({ onClose, onSuccess }) => {
               }
             }}
             disabled={!canProceed() || loading}
+            className="bg-sidecar-indigo-600 hover:bg-sidecar-indigo-700 text-white font-semibold"
           >
             {loading
               ? "Creating..."

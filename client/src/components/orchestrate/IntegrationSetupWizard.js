@@ -47,13 +47,14 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+    <Card className="w-full max-w-3xl mx-auto bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
       <CardHeader>
-        <CardTitle className="text-gray-900 dark:text-gray-100">
-          Import to Watsonx Orchestrate
+        <CardTitle className="text-neutral-900 dark:text-neutral-100">
+          Import to watsonx Orchestrate
         </CardTitle>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          Import "{server.name}" as a collaborator agent
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+          Register "<span className="font-mono">{server.name}</span>" as an
+          agent in watsonx Orchestrate
         </p>
       </CardHeader>
       <CardContent>
@@ -75,8 +76,8 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                 onClick={() => setImportMethod("adk")}
                 className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
                   importMethod === "adk"
-                    ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-                    : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                    ? "border-sidecar-indigo-500 bg-sidecar-indigo-50 dark:bg-sidecar-indigo-950"
+                    : "border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700"
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -87,16 +88,16 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                     className="mt-1"
                   />
                   <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                    <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">
                       ADK-based Import (Recommended)
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
                       Uses the Orchestrate ADK CLI to import the agent. Requires
                       ADK to be installed in your environment.
                     </p>
-                    <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                    <div className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
                       Command:{" "}
-                      <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">
+                      <code className="bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded font-mono">
                         uv run orchestrate agents import
                       </code>
                     </div>
@@ -108,8 +109,8 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                 onClick={() => setImportMethod("api")}
                 className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
                   importMethod === "api"
-                    ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-                    : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                    ? "border-sidecar-indigo-500 bg-sidecar-indigo-50 dark:bg-sidecar-indigo-950"
+                    : "border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700"
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -120,16 +121,16 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                     className="mt-1"
                   />
                   <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                    <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">
                       REST API Import
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
                       Direct API call to Orchestrate to register the agent.
                       Requires Orchestrate API credentials.
                     </p>
-                    <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                    <div className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
                       Method:{" "}
-                      <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">
+                      <code className="bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded font-mono">
                         POST /api/agents
                       </code>
                     </div>
@@ -143,8 +144,8 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
           <TabsContent value="config" className="space-y-4">
             {importMethod === "adk" && (
               <div className="space-y-4">
-                <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-                  <p className="text-sm text-blue-900 dark:text-blue-200">
+                <div className="p-4 bg-sidecar-indigo-50 dark:bg-sidecar-indigo-950 border border-sidecar-indigo-200 dark:border-sidecar-indigo-800 rounded-lg">
+                  <p className="text-sm text-sidecar-indigo-900 dark:text-sidecar-indigo-200">
                     <strong>Prerequisites:</strong> Ensure the Orchestrate ADK
                     is installed and configured with your credentials.
                   </p>
@@ -160,9 +161,9 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                     onChange={(e) =>
                       updateField("push_endpoint", e.target.value)
                     }
-                    className="bg-white dark:bg-gray-800"
+                    className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700 font-mono"
                   />
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400">
                     Leave empty to auto-detect from ADK configuration
                   </p>
                 </div>
@@ -179,8 +180,8 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                       onClick={() => setEnvironment("local")}
                       className={`p-3 border-2 rounded-lg cursor-pointer transition-all ${
                         environment === "local"
-                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-                          : "border-gray-200 dark:border-gray-700 hover:border-gray-300"
+                          ? "border-sidecar-indigo-500 bg-sidecar-indigo-50 dark:bg-sidecar-indigo-950"
+                          : "border-neutral-200 dark:border-neutral-800 hover:border-neutral-300"
                       }`}
                     >
                       <div className="flex items-center gap-2">
@@ -190,10 +191,10 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                           onChange={() => setEnvironment("local")}
                         />
                         <div>
-                          <div className="font-semibold text-sm text-gray-900 dark:text-gray-100">
+                          <div className="font-semibold text-sm text-neutral-900 dark:text-neutral-100">
                             Local
                           </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                          <div className="text-xs text-neutral-500 dark:text-neutral-400">
                             On-premise instance
                           </div>
                         </div>
@@ -203,8 +204,8 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                       onClick={() => setEnvironment("aws")}
                       className={`p-3 border-2 rounded-lg cursor-pointer transition-all ${
                         environment === "aws"
-                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-                          : "border-gray-200 dark:border-gray-700 hover:border-gray-300"
+                          ? "border-sidecar-indigo-500 bg-sidecar-indigo-50 dark:bg-sidecar-indigo-950"
+                          : "border-neutral-200 dark:border-neutral-800 hover:border-neutral-300"
                       }`}
                     >
                       <div className="flex items-center gap-2">
@@ -214,10 +215,10 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                           onChange={() => setEnvironment("aws")}
                         />
                         <div>
-                          <div className="font-semibold text-sm text-gray-900 dark:text-gray-100">
+                          <div className="font-semibold text-sm text-neutral-900 dark:text-neutral-100">
                             AWS
                           </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                          <div className="text-xs text-neutral-500 dark:text-neutral-400">
                             Cloud instance
                           </div>
                         </div>
@@ -257,9 +258,9 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                     onChange={(e) =>
                       updateField("orchestrate_url", e.target.value)
                     }
-                    className="bg-white dark:bg-gray-800"
+                    className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700 font-mono"
                   />
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400">
                     {environment === "aws"
                       ? "Include the full path up to /instances/{instance-id}"
                       : "Base URL of your Orchestrate instance"}
@@ -276,9 +277,9 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                       onChange={(e) =>
                         updateField("public_api_url", e.target.value)
                       }
-                      className="bg-white dark:bg-gray-800"
+                      className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700 font-mono"
                     />
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
                       Public URL where your agent is accessible (e.g., ngrok
                       tunnel)
                     </p>
@@ -293,7 +294,7 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                     placeholder="Your Orchestrate API token"
                     value={formData.auth_token}
                     onChange={(e) => updateField("auth_token", e.target.value)}
-                    className="bg-white dark:bg-gray-800"
+                    className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700 font-mono"
                   />
                 </div>
                 <div className="space-y-2">
@@ -307,7 +308,7 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                     onChange={(e) =>
                       updateField("push_endpoint", e.target.value)
                     }
-                    className="bg-white dark:bg-gray-800"
+                    className="bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-700 font-mono"
                   />
                 </div>
               </div>
@@ -323,15 +324,35 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
           {/* Step 3: Import Status */}
           <TabsContent value="status" className="space-y-4">
             <div className="text-center py-8">
-              <div className="text-6xl mb-4">⏳</div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+              <svg
+                className="w-16 h-16 mx-auto mb-4 text-sidecar-indigo-600 dark:text-sidecar-indigo-400 animate-spin"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
                 Import in Progress
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-neutral-600 dark:text-neutral-400 mb-4">
                 Command ID:{" "}
-                <code className="font-mono text-sm">{commandId}</code>
+                <code className="font-mono text-sm bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
+                  {commandId}
+                </code>
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">
                 The import process is running. You can check the status in the
                 Integrations page.
               </p>
@@ -340,7 +361,7 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
         </Tabs>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="flex justify-between mt-6 pt-4 border-t border-neutral-200 dark:border-neutral-800">
           <Button
             variant="outline"
             onClick={() => {
@@ -352,6 +373,7 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                 onClose?.();
               }
             }}
+            className="border-neutral-300 dark:border-neutral-700"
           >
             {currentStep === "status" ? "Close" : "Back"}
           </Button>
@@ -373,6 +395,7 @@ const IntegrationSetupWizard = ({ server, onClose, onSuccess }) => {
                     !formData.auth_token ||
                     (environment === "aws" && !formData.public_api_url)))
               }
+              className="bg-sidecar-indigo-600 hover:bg-sidecar-indigo-700 text-white font-semibold"
             >
               {loading
                 ? "Importing..."

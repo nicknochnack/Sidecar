@@ -5,6 +5,7 @@ import { logout } from "../utilities/auth";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Card } from "./ui/card";
 import { useDarkMode } from "../utilities/DarkModeContext";
+import sidecarLogo from "./img/other/sidecar.png";
 
 const Header = () => {
   const { isAuth, setIsAuth } = useContext(authContext);
@@ -26,14 +27,16 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40 shadow-sm">
+    <header className="bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 sticky top-0 z-40 backdrop-blur-sm bg-white/80 dark:bg-neutral-950/80">
       <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-16">
-        <Link to="/dashboard" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-tdc-yellow rounded-lg flex items-center justify-center">
-            <span className="text-2xl">🚴</span>
-          </div>
-          <span className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
-            Tour De Data
+        <Link to="/dashboard" className="flex items-center gap-3 group">
+          <img
+            src={sidecarLogo}
+            alt="Sidecar"
+            className="w-9 h-9 transition-transform group-hover:scale-105"
+          />
+          <span className="text-xl font-bold text-neutral-900 dark:text-white tracking-tight font-sans">
+            Sidecar
           </span>
         </Link>
 
@@ -43,35 +46,26 @@ const Header = () => {
             <nav className="hidden md:flex items-center gap-6">
               <Link
                 to="/dashboard"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-tdc-purple dark:hover:text-tdc-yellow transition-colors"
+                className="text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-sidecar-indigo-600 dark:hover:text-sidecar-indigo-400 transition-colors"
               >
                 Dashboard
               </Link>
               <Link
                 to="/integrations"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-tdc-purple dark:hover:text-tdc-yellow transition-colors"
+                className="text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-sidecar-indigo-600 dark:hover:text-sidecar-indigo-400 transition-colors"
               >
                 Integrations
               </Link>
 
-              <a
-                href="https://tourdecure.com.au/donate"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-tdc-yellow hover:bg-tdc-yellow-dark text-gray-900 font-bold px-6 py-2 rounded-md transition-colors text-sm"
-              >
-                DONATE
-              </a>
-
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="p-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors border border-transparent hover:border-neutral-200 dark:hover:border-neutral-700"
                 aria-label="Toggle dark mode"
               >
                 {isDarkMode ? (
                   <svg
-                    className="w-5 h-5 text-yellow-400"
+                    className="w-5 h-5 text-sidecar-indigo-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -83,7 +77,7 @@ const Header = () => {
                   </svg>
                 ) : (
                   <svg
-                    className="w-5 h-5 text-gray-700"
+                    className="w-5 h-5 text-neutral-700"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -94,19 +88,19 @@ const Header = () => {
 
               <div className="relative">
                 <Avatar
-                  className="w-9 h-9 cursor-pointer border-2 border-gray-200 dark:border-gray-600"
+                  className="w-9 h-9 cursor-pointer border border-neutral-200 dark:border-neutral-700 hover:border-sidecar-indigo-500 dark:hover:border-sidecar-indigo-500 transition-colors"
                   onClick={() => setShowMenu((v) => !v)}
                 >
-                  <AvatarFallback className="bg-tdc-purple text-white text-xs font-semibold">
+                  <AvatarFallback className="bg-sidecar-indigo-600 dark:bg-sidecar-indigo-500 text-white text-xs font-semibold font-mono">
                     ME
                   </AvatarFallback>
                 </Avatar>
 
                 {showMenu && (
-                  <Card className="absolute right-0 top-12 w-40 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-lg p-1">
+                  <Card className="absolute right-0 top-12 w-40 bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 shadow-lg p-1">
                     <button
                       onClick={handleLogout}
-                      className="w-full text-left px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors font-medium"
+                      className="w-full text-left px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded transition-colors font-medium"
                     >
                       Logout
                     </button>
@@ -120,12 +114,12 @@ const Header = () => {
               {/* Dark Mode Toggle for Mobile */}
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="p-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                 aria-label="Toggle dark mode"
               >
                 {isDarkMode ? (
                   <svg
-                    className="w-5 h-5 text-yellow-400"
+                    className="w-5 h-5 text-sidecar-indigo-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -137,7 +131,7 @@ const Header = () => {
                   </svg>
                 ) : (
                   <svg
-                    className="w-5 h-5 text-gray-700"
+                    className="w-5 h-5 text-neutral-700"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -149,12 +143,12 @@ const Header = () => {
               {/* Hamburger Menu Button */}
               <button
                 onClick={() => setShowMobileMenu((v) => !v)}
-                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="p-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                 aria-label="Toggle menu"
               >
                 {showMobileMenu ? (
                   <svg
-                    className="w-6 h-6 text-gray-700 dark:text-gray-300"
+                    className="w-6 h-6 text-neutral-700 dark:text-neutral-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -168,7 +162,7 @@ const Header = () => {
                   </svg>
                 ) : (
                   <svg
-                    className="w-6 h-6 text-gray-700 dark:text-gray-300"
+                    className="w-6 h-6 text-neutral-700 dark:text-neutral-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -186,33 +180,25 @@ const Header = () => {
 
             {/* Mobile Menu Dropdown */}
             {showMobileMenu && (
-              <div className="absolute top-16 left-0 right-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-lg md:hidden">
+              <div className="absolute top-16 left-0 right-0 bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 shadow-lg md:hidden">
                 <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
                   <Link
                     to="/dashboard"
                     onClick={handleNavClick}
-                    className="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
+                    className="px-4 py-3 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-md transition-colors"
                   >
                     Dashboard
                   </Link>
                   <Link
                     to="/integrations"
                     onClick={handleNavClick}
-                    className="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
+                    className="px-4 py-3 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-md transition-colors"
                   >
                     Integrations
                   </Link>
-                  <a
-                    href="https://tourdecure.com.au/donate"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-3 text-sm font-medium bg-tdc-yellow hover:bg-tdc-yellow-dark text-gray-900 rounded-md transition-colors text-center"
-                  >
-                    DONATE
-                  </a>
                   <button
                     onClick={handleLogout}
-                    className="px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors text-left"
+                    className="px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-md transition-colors text-left"
                   >
                     Logout
                   </button>

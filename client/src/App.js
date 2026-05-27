@@ -31,7 +31,7 @@ function App() {
         value={{ isAuth, setIsAuth, isLoading, setIsLoading }}
       >
         <Router>
-          <div className="antialiased text-foreground bg-white dark:bg-gray-900 dark:text-gray-100 min-h-screen">
+          <div className="antialiased text-foreground bg-white dark:bg-neutral-950 dark:text-neutral-100 min-h-screen">
             <Routes>
               <Route
                 path="/login"
@@ -66,7 +66,7 @@ function App() {
                 path="/servers/create"
                 element={
                   <PrivateRoute>
-                    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+                    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 py-8">
                       <ServerCreateWizard />
                     </div>
                   </PrivateRoute>

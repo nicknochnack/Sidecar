@@ -4,7 +4,7 @@ A control-plane application for building, running, importing, and monitoring A2A
 
 ## Overview
 
-Sidecar provides a complete platform for managing A2A (Agent-to-Agent) servers that integrate with watsonx Orchestrate. It includes:
+Sidecar is a lightweight companion tool that provisions A2A (Agent-to-Agent) servers on the fly for seamless integration with watsonx Orchestrate. Like a motorcycle sidecar that rides alongside, Sidecar attaches A2A servers to Orchestrate, providing:
 
 - **Server Management**: Create, start, stop, and monitor A2A servers
 - **Orchestrate Integration**: Import agents, tools, and models into watsonx Orchestrate
