@@ -1,3 +1,27 @@
 {
-  "domain": "https://funnel-stg-9988a5c856ca.herokuapp.com/"
+  "port": 5050,
+  "database": {
+    "client": "pg",
+    "connection": {
+      "host": "staging-db-host",
+      "port": 5432,
+      "user": "sidecar",
+      "password": "staging-password",
+      "database": "sidecar"
+    },
+    "pool": {
+      "min": 2,
+      "max": 10
+    }
+  },
+  "worker": {
+    "url": "http://worker:9000"
+  },
+  "a2a": {
+    "minPort": 9997,
+    "maxPort": 10100
+  },
+  "jwt": {
+    "expiresIn": "7d"
+  }
 }

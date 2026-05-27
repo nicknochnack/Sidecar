@@ -1,5 +1,5 @@
 {
-  "name": "performance-insights",
+  "name": "sidecar",
   "version": "1.0.0",
   "main": "server.js",
   "engines": {
@@ -10,12 +10,16 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm run start --prefix ./client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "worker": "cd worker && uvicorn app.main:app --reload --port 9000",
+    "dev": "concurrently \"npm run server\" \"npm run worker\" \"npm run client\"",
+    "migrate": "knex migrate:latest",
+    "migrate:make": "knex migrate:make",
+    "migrate:rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
     "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
-  "author": "",
   "license": "ISC",
-  "description": "Performance insights for endurance athletes via Intervals.icu and Strava",
+  "description": "Control plane for building, running, importing and monitoring A2A servers for watsonx Orchestrate",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
     "axios": "^1.7.5",
@@ -33,11 +37,8 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7",
     "pg": "^8.12.0",
-    "uuid": "^11.0.3"
-  },
-  "devDependencies": {
-    "tailwindcss": "^3.4.13"
+    "uuid": "^11.0.3",
+    "ws": "^8.18.0"
   }
 }

@@ -5,15 +5,17 @@ import { cva } from "class-variance-authority";
 import { cn } from "../../utilities/utils";
 
 const labelVariants = cva(
-  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-900 dark:text-gray-100",
 );
 
 const Label = React.forwardRef(function Label({ className, ...props }, ref) {
-  <LabelPrimitive.Root
-    ref={ref}
-    className={cn(labelVariants(), className)}
-    {...props}
-  />;
+  return (
+    <LabelPrimitive.Root
+      ref={ref}
+      className={cn(labelVariants(), className)}
+      {...props}
+    />
+  );
 });
 
 Label.displayName = "Label";

@@ -28,7 +28,11 @@ function Signup({ setIsAuth }) {
     e.preventDefault();
     setError("");
     try {
-      const response = await api.post("/auth/register", { email, password });
+      const response = await api.post(
+        "/auth/register",
+        { email, password },
+        { public: true },
+      );
       if (response && response.data && response.data.token) {
         setAuthToken(response.data.token);
         setIsAuth(true);
@@ -86,7 +90,10 @@ function Signup({ setIsAuth }) {
             <CardContent>
               <div className="grid gap-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="email" className="text-gray-700 dark:text-gray-300 font-medium">
+                  <Label
+                    htmlFor="email"
+                    className="text-gray-700 dark:text-gray-300 font-medium"
+                  >
                     Email
                   </Label>
                   <Input

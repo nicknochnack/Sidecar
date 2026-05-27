@@ -1,0 +1,12 @@
+spec_version: v1
+kind: external
+name: CopilotMockDataAgent
+title: CopilotMockDataAgent
+provider: external_chat/A2A/0.3.0
+description: This agent is great at generating synthetic finance data using its mock finance data tool.
+api_url: "http://localhost:9997"
+auth_scheme: NONE
+chat_params:
+  sendHistory: true
+  stream: false
+  pushNotifications: true

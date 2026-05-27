@@ -9,7 +9,7 @@ class User {
       .insert({
         id: uuidv4(),
         email,
-        password: hashedPassword,
+        password_hash: hashedPassword,
       })
       .returning("*");
     return user;
@@ -24,7 +24,7 @@ class User {
   }
 
   static async validatePassword(user, password) {
-    return bcrypt.compare(password, user.password);
+    return bcrypt.compare(password, user.password_hash);
   }
   static async updateResetToken(userId, resetToken, resetTokenExpiry) {
     await db("users")
@@ -45,7 +45,7 @@ class User {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     await db("users")
       .where({ id: userId })
-      .update({ password: hashedPassword });
+      .update({ password_hash: hashedPassword });
   }
 
   static async clearResetToken(userId) {

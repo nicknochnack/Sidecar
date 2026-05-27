@@ -11,6 +11,9 @@ import Login from "./components/Login";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import PrivateRoute from "./components/PrivateRoute";
+import ServersDashboard from "./components/servers/ServersDashboard";
+import ServerDetail from "./components/servers/ServerDetail";
+import ServerCreateWizard from "./components/servers/ServerCreateWizard";
 import Integrations from "./components/Integrations";
 import { DarkModeProvider } from "./utilities/DarkModeContext";
 
@@ -48,6 +51,32 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Dashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/servers"
+                element={
+                  <PrivateRoute>
+                    <ServersDashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/servers/create"
+                element={
+                  <PrivateRoute>
+                    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+                      <ServerCreateWizard />
+                    </div>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/servers/:id"
+                element={
+                  <PrivateRoute>
+                    <ServerDetail />
                   </PrivateRoute>
                 }
               />

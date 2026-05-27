@@ -1,5 +1,15 @@
 {
-  "domain": "http://localhost:3000",
+  "port": 5050,
+  "worker": {
+    "url": "http://localhost:9000"
+  },
+  "a2a": {
+    "minPort": 9997,
+    "maxPort": 10100
+  },
+  "jwt": {
+    "expiresIn": "7d"
+  },
   "throttle": {
     "api": {
       "max": 1000,
@@ -7,29 +17,17 @@
       "headers": true,
       "message": "Too many API calls from this IP, please try again soon."
     },
-    "signup": {
-      "max": 5,
-      "windowMs": 3600000,
+    "auth": {
+      "max": 50,
+      "windowMs": 900000,
       "headers": true,
-      "message": "You have created too many accounts."
+      "message": "Too many authentication attempts."
     },
-    "mail": {
-      "max": 10,
-      "windowMs": 3600000,
+    "orchestrate": {
+      "max": 30,
+      "windowMs": 60000,
       "headers": true,
-      "message": "You have sent to many messages, please try again soon."
-    },
-    "signin": {
-      "max": 5,
-      "windowMs": 300000,
-      "headers": true,
-      "message": "Too many sign in attempts, please try again in a few minutes."
-    },
-    "password_reset": {
-      "max": 3,
-      "windowMs": 300000,
-      "headers": true,
-      "message": "You have reached the limit of password reset requests."
+      "message": "Too many orchestrate commands."
     }
   }
 }

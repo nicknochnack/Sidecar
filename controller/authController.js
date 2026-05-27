@@ -5,6 +5,7 @@ const { validate, assert } = require("../utilities/utils");
 const authController = {
   async register(req, res) {
     try {
+      console.log(req);
       validate(req.body, ["email", "password"]);
       const { email, password } = req.body;
 
@@ -58,7 +59,7 @@ const authController = {
 
       const resetToken = jwt.sign(
         { timestamp: Date.now(), user_id: user.id },
-        user.password,
+        user.password_hash,
         { expiresIn: "5m" },
       );
 
@@ -83,7 +84,7 @@ const authController = {
       const user = await User.findByEmail(email);
       assert(user, "Invalid or expired reset token");
 
-      jwt.verify(token, user.password);
+      jwt.verify(token, user.password_hash);
 
       await User.updatePassword(user.id, password);
 

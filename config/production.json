@@ -1,3 +1,27 @@
 {
-  "domain": "https://funnel-prd-b14c9d86e1c9.herokuapp.com/"
+  "port": 5050,
+  "database": {
+    "client": "pg",
+    "connection": {
+      "host": "production-db-host",
+      "port": 5432,
+      "user": "sidecar",
+      "password": "production-password",
+      "database": "sidecar"
+    },
+    "pool": {
+      "min": 2,
+      "max": 10
+    }
+  },
+  "worker": {
+    "url": "http://worker:9000"
+  },
+  "a2a": {
+    "minPort": 9997,
+    "maxPort": 10100
+  },
+  "jwt": {
+    "expiresIn": "7d"
+  }
 }
