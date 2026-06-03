@@ -29,19 +29,48 @@ const Header = () => {
   return (
     <header className="bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 sticky top-0 z-40 backdrop-blur-sm bg-white/80 dark:bg-neutral-950/80">
       <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-16">
-        <Link to="/dashboard" className="flex items-center gap-3 group">
-          <img
-            src={sidecarLogo}
-            alt="Sidecar"
-            className="w-9 h-9 transition-transform group-hover:scale-105"
-          />
-          <span className="text-xl font-bold text-neutral-900 dark:text-white tracking-tight font-sans">
-            Sidecar
-          </span>
-        </Link>
+        {/* Show logo only when NOT authenticated (landing, login, signup pages) */}
+        {!isAuth ? (
+          <Link to="/" className="flex items-center gap-3 group">
+            <img
+              src={sidecarLogo}
+              alt="Sidecar"
+              className="w-9 h-9 transition-transform group-hover:scale-105"
+            />
+            <span className="text-xl font-bold text-neutral-900 dark:text-white tracking-tight font-sans">
+              Sidecar
+            </span>
+          </Link>
+        ) : (
+          <div className="flex-shrink-0"></div>
+        )}
 
         {isAuth && (
           <>
+            {/* Search Bar - Desktop */}
+            <div className="hidden lg:flex flex-1 max-w-md mx-8">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder="Search agents, tools, knowledge bases..."
+                  className="w-full px-4 py-2 pl-10 text-sm bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-sidecar-indigo-500 dark:focus:ring-sidecar-indigo-400 focus:border-transparent text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 dark:placeholder-neutral-400"
+                />
+                <svg
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-neutral-400 dark:text-neutral-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
               <Link
@@ -51,11 +80,28 @@ const Header = () => {
                 Dashboard
               </Link>
               <Link
+                to="/models"
+                className="text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-sidecar-indigo-600 dark:hover:text-sidecar-indigo-400 transition-colors"
+              >
+                Models
+              </Link>
+              <Link
+                to="/environments"
+                className="text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-sidecar-indigo-600 dark:hover:text-sidecar-indigo-400 transition-colors"
+              >
+                Environments
+              </Link>
+              <Link
                 to="/integrations"
                 className="text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-sidecar-indigo-600 dark:hover:text-sidecar-indigo-400 transition-colors"
               >
                 Integrations
               </Link>
+
+              {/* Do NOT Press Button */}
+              <button className="px-3 py-1.5 text-xs font-bold text-white bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800 rounded-md transition-colors shadow-sm hover:shadow-md border-2 border-red-700 dark:border-red-800 uppercase">
+                Do NOT Press
+              </button>
 
               {/* Dark Mode Toggle */}
               <button

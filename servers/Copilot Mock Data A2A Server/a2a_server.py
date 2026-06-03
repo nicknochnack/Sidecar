@@ -34,7 +34,6 @@ if __name__ == '__main__':
         examples=[
             'Create some synthetic credit card profiles.',
             'Generate some finance personas',
-            'Generate 3 fictional finance profiles with different professions using the collaborator agent',
         ],
     )
 

@@ -16,7 +16,26 @@ import ServersDashboard from "./components/servers/ServersDashboard";
 import ServerDetail from "./components/servers/ServerDetail";
 import ServerCreateWizard from "./components/servers/ServerCreateWizard";
 import Integrations from "./components/Integrations";
+import Sidebar from "./components/Sidebar";
+import DashboardLayout from "./components/DashboardLayout";
 import { DarkModeProvider } from "./utilities/DarkModeContext";
+
+// Import all capability pages
+import {
+  IntegrationsCopilot,
+  IntegrationsAzure,
+  IntegrationsGemini,
+  IntegrationsBedrock,
+  Connections,
+  ToolsAndToolkits,
+  RAGKnowledgeBases,
+  RAGCentral,
+  Plugins,
+  Traces,
+  EvaluationRedTeaming,
+  EvaluationRubric,
+  EvaluationRapid,
+} from "./components/capabilities/CapabilityPages";
 
 import "./App.css";
 
@@ -47,11 +66,14 @@ function App() {
                 path="/reset-password/:token"
                 element={<ResetPassword />}
               />
+              {/* Dashboard Routes with Sidebar */}
               <Route
                 path="/dashboard"
                 element={
                   <PrivateRoute>
-                    <Dashboard />
+                    <DashboardLayout>
+                      <Dashboard />
+                    </DashboardLayout>
                   </PrivateRoute>
                 }
               />
@@ -59,7 +81,9 @@ function App() {
                 path="/servers"
                 element={
                   <PrivateRoute>
-                    <ServersDashboard />
+                    <DashboardLayout>
+                      <ServersDashboard />
+                    </DashboardLayout>
                   </PrivateRoute>
                 }
               />
@@ -67,9 +91,9 @@ function App() {
                 path="/servers/create"
                 element={
                   <PrivateRoute>
-                    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 py-8">
+                    <DashboardLayout>
                       <ServerCreateWizard />
-                    </div>
+                    </DashboardLayout>
                   </PrivateRoute>
                 }
               />
@@ -77,15 +101,165 @@ function App() {
                 path="/servers/:id"
                 element={
                   <PrivateRoute>
-                    <ServerDetail />
+                    <DashboardLayout>
+                      <ServerDetail />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+
+              {/* Third-Party Integration Routes */}
+              <Route
+                path="/integrations/copilot"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <IntegrationsCopilot />
+                    </DashboardLayout>
                   </PrivateRoute>
                 }
               />
               <Route
+                path="/integrations/azure"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <IntegrationsAzure />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/integrations/gemini"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <IntegrationsGemini />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/integrations/bedrock"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <IntegrationsBedrock />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+
+              {/* Connections Route */}
+              <Route
+                path="/connections"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <Connections />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+
+              {/* Tools & Toolkits Route */}
+              <Route
+                path="/tools"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <ToolsAndToolkits />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+
+              {/* RAG Routes */}
+              <Route
+                path="/rag/knowledge-bases"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <RAGKnowledgeBases />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/rag/central"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <RAGCentral />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+
+              {/* Plugins Route */}
+              <Route
+                path="/plugins"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <Plugins />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+
+              {/* Traces Route */}
+              <Route
+                path="/traces"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <Traces />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+
+              {/* Evaluation Routes */}
+              <Route
+                path="/evaluation/red-teaming"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <EvaluationRedTeaming />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/evaluation/rubric"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <EvaluationRubric />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/evaluation/rapid"
+                element={
+                  <PrivateRoute>
+                    <DashboardLayout>
+                      <EvaluationRapid />
+                    </DashboardLayout>
+                  </PrivateRoute>
+                }
+              />
+
+              {/* Legacy Integrations Route (keeping for compatibility) */}
+              <Route
                 path="/integrations"
                 element={
                   <PrivateRoute>
-                    <Integrations />
+                    <DashboardLayout>
+                      <Integrations />
+                    </DashboardLayout>
                   </PrivateRoute>
                 }
               />

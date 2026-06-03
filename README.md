@@ -1,15 +1,9 @@
 # Sidecar
 
-A control-plane application for building, running, importing, and monitoring A2A servers for IBM watsonx Orchestrate.
+A dev helper app for adding a bunch of stuff into IBM watsonx Orchestrate.
 
-## Overview
-
-Sidecar is a lightweight companion tool that provisions A2A (Agent-to-Agent) servers on the fly for seamless integration with watsonx Orchestrate. Like a motorcycle sidecar that rides alongside, Sidecar attaches A2A servers to Orchestrate, providing:
-
-- **Server Management**: Create, start, stop, and monitor A2A servers
-- **Orchestrate Integration**: Import agents, tools, and models into watsonx Orchestrate
-- **Real-time Monitoring**: Track server health, task history, and performance metrics
-- **WebSocket Streaming**: Live log tailing and metrics updates
+## See it live and in action 📺
+<a href="https://www.linkedin.com/feed/update/urn:li:activity:7466031202953601025/"><img src="https://i.imgur.com/5TzTzVy.jpeg"/></a>
 
 ## Architecture
 
@@ -189,43 +183,6 @@ sidecar/
 └── config/                 # Configuration files
 ```
 
-### Running Migrations
-
-```bash
-# Run latest migrations
-npm run migrate
-
-# Create new migration
-npm run migrate:make migration_name
-
-# Rollback last migration
-npm run migrate:rollback
-```
-
-### Testing
-
-```bash
-# Run tests (when implemented)
-npm test
-```
-
-## Deployment
-
-### Production Environment
-
-1. Set `NODE_ENV=production`
-2. Configure production database in `config/production.json`
-3. Set secure JWT_SECRET and ENCRYPTION_KEY
-4. Build client: `cd client && npm run build`
-5. Start server: `npm start`
-
-### Docker Deployment
-
-```bash
-# Build and run with Docker Compose
-docker-compose up -d
-```
-
 ## Troubleshooting
 
 ### Database Connection Issues
@@ -247,30 +204,3 @@ docker-compose up -d
 ## License
 
 ISC
-
-## Support
-
-For issues and questions, please refer to the architecture documentation in the `architecture/` directory.
-
-
-
-Existing to command to import into localhost 
-curl --location 'http://192.168.0.81:4321/v1/agents/external-chat' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmMjQyZWFkZi0wZGM5LTRlYWUtYjJkNy02NWIwOWI0YjRiMTYiLCJ1c2VybmFtZSI6Ind4by5hcmNoZXJAaWJtLmNvbSIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJ0ZW5hbnRfaWQiOiJhNjcyMDBiNC05YWQ4LTQzYjQtYjAzYS0zZTI5YThhYWM0ZDQiLCJ3b1RlbmFudElkIjoiYTY3MjAwYjQtOWFkOC00M2I0LWIwM2EtM2UyOWE4YWFjNGQ0Iiwid29Vc2VySWQiOiJmMjQyZWFkZi0wZGM5LTRlYWUtYjJkNy02NWIwOWI0YjRiMTYifQ.q4m3TVAauKWhx4h1BlFZr-m719nmtAtC1TcIskvd3VI' \
---data '{
-  "name": "CopilotMockData2",
-  "display_name": "CopilotMockData2",
-  "description": "This agent is great at generating synthetic finance data using its mock finance data tool.",
-  "instructions": "instructions here",
-  "provider": "external_chat/A2A/0.3.0", 
-  "kind":"external", 
-  "api_url":"http://host.docker.internal:9997",
-  "auth_scheme": "NONE",
-  "chat_params":{
-      "sendHistory":"true", 
-      "stream":"false", 
-      "pushNotifications":"true"
-  }
-}'
-
